@@ -32,9 +32,6 @@ public class HelloWorld extends CordovaActivity
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html")
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-          WebView.setWebContentsDebuggingEnabled(true);
-        }
     }
 }
 
