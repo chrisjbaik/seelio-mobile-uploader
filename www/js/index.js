@@ -35,9 +35,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
-        $('.add-photo').click(function () {
-            this.addPhoto();
-        });
+        document.getElementById('add-photo').addEventListener('click', this.addPhoto);
     },
     addPhoto: function () {
         navigator.camera.getPicture(function cameraSuccess(imageData) {
