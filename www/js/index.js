@@ -35,13 +35,17 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 
+        console.log('Device is ready');
         document.getElementById('add-photo').addEventListener('touchend', this.addPhoto);
+        console.log('Listener added');
     },
     addPhoto: function () {
+        console.log('Add photo triggered.');
         navigator.camera.getPicture(function cameraSuccess(imageData) {
+            console.log('getPicture success.');
             $('#show-image').attr('src', "data:image/jpeg;base64," + imageData);
         }, function cameraError(message) {
-            alert(message);
+            console.log(message);
         });
     },
     // Update DOM on a Received Event
