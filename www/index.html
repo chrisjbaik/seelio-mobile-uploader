@@ -28,26 +28,22 @@
     </head>
     <body>
         <div class="app">
+            <button class="button add-photo">Add a Photo</button>
+            <img id='show-image' />
+        </div>
+        <!--<div class="app">
             <!--<h1>PhoneGap</h1>
             <div id="deviceready" class="blink">
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
-            </div>-->
-            <button class="button add-photo">Add a Photo</button>
-            <img id='show-image' />
-        </div>
+            </div>
+        </div>-->
         <script type="text/javascript" src="phonegap.js"></script>
         <script type="text/javascript" src="js/zepto.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script src="http://debug.phonegap.com/target/target-script-min.js#seelio-mobile-upoa"></script>
         <script type="text/javascript">
             app.initialize();
-            $('.add-photo').click(function () {
-                navigator.camera.getPicture(function cameraSuccess(imageData) {
-                    $('#show-image').attr('src', "data:image/jpeg;base64," + imageData);
-                }, function cameraError(message) {
-                    alert(message);
-                });
-            });
         </script>
     </body>
 </html>
