@@ -34,6 +34,19 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+        console.log('Device is ready');
+        $('#add-photo').on('touchend', app.addPhoto);
+        console.log('Listener added');
+    },
+    addPhoto: function () {
+        console.log('Add photo triggered.');
+        navigator.camera.getPicture(function cameraSuccess(imageData) {
+            console.log('getPicture success.');
+            $('#show-image').attr('src', "data:image/jpeg;base64," + imageData);
+        }, function cameraError(message) {
+            console.log(message);
+        });
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
