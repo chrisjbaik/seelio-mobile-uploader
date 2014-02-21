@@ -36,7 +36,7 @@ var app = {
         app.receivedEvent('deviceready');
 
         console.log('Device is ready');
-        $('#add-photo').click('touchend', this.addPhoto);
+        $('#add-photo').on('touchend', this.addPhoto);
         console.log('Listener added');
     },
     addPhoto: function () {
