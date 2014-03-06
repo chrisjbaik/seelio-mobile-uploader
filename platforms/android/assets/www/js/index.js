@@ -33,23 +33,45 @@ var app = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-
+        //app.receivedEvent('deviceready');
         console.log('Device is ready');
         $('#add-photo').on('touchend', app.addPhoto);
-        console.log('Listener added');
+        console.log('Touch listener added.');
     },
     addPhoto: function () {
         console.log('Add photo triggered.');
-        navigator.camera.getPicture(function cameraSuccess(imageData) {
-            console.log('getPicture success.');
-            $('#show-image').attr('src', "data:image/jpeg;base64," + imageData);
+        navigator.camera.getPicture(function cameraSuccess(fileURI) {
+            console.log('getPicture success:', fileURI);
+            $('#show-image').attr('src', fileURI);
+            app.uploadPhotoToSeelio(fileURI);
         }, function cameraError(message) {
             console.log(message);
-        });
+        }, { destinationType: navigator.camera.DestinationType.FILE_URI });
     },
+    uploadPhotoToSeelio: function (fileURI) {
+        var apiHost = 'http://localhost:7754';
+        var apiKey = 'l5GufyCpYPaRoQB4wzZXeP+jZj6sT83b';
+        var workId = '5318ceebb61b818430000049';
+        var requestUrl = apiHost + '/v1/works/' + workId + '/attachments?api_key=' + apiKey;
+        console.log('Posting request to:', requestUrl);
+
+        var win = function (r) {
+            console.log('Response received:', r);
+        };
+        var fail = function (err) {
+            console.error(err);
+        };
+
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+        options.mimeType = "image/jpeg";
+
+        var ft = new FileTransfer();
+        ft.upload(fileURI, encodeURI(requestUrl), win, fail, options);
+    }
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    /*receivedEvent: function(id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -58,5 +80,5 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    }*/
 };
