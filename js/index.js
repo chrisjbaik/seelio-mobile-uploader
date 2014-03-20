@@ -49,7 +49,7 @@ var app = {
         }, { destinationType: navigator.camera.DestinationType.FILE_URI });
     },
     uploadPhotoToSeelio: function (fileURI) {
-        var apiHost = 'http://localhost:7754';
+        var apiHost = 'http://10.0.2.2:7754';
         var apiKey = 'l5GufyCpYPaRoQB4wzZXeP+jZj6sT83b';
         var workId = '5318ceebb61b818430000049';
         var requestUrl = apiHost + '/v1/works/' + workId + '/attachments?api_key=' + apiKey;
