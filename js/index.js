@@ -50,9 +50,9 @@ var app = {
     },
     uploadPhotoToSeelio: function (fileURI) {
         var apiHost = 'http://10.0.2.2:7754';
-        var apiKey = 'l5GufyCpYPaRoQB4wzZXeP+jZj6sT83b';
+        var apiKey = encodeURIComponent('l5GufyCpYPaRoQB4wzZXeP+jZj6sT83b');
         var workId = '5318ceebb61b818430000049';
-        var requestUrl = encodeURIComponent(apiHost + '/v1/works/' + workId + '/attachments?api_key=' + apiKey);
+        var requestUrl = apiHost + '/v1/works/' + workId + '/attachments?api_key=' + apiKey;
         console.log('Posting request to:', requestUrl);
 
         var win = function (r) {
